@@ -1,5 +1,3 @@
-'use client'
-
 import { Mail, Github, Twitter, Linkedin, MessageSquare, Send } from 'lucide-react'
 import { getSocial } from '@/lib/content'
 

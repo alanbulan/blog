@@ -2,10 +2,6 @@
 import { ExternalLink, Github, Star } from 'lucide-react'
 import { getAllProjects } from '@/lib/content'
 
-// 禁用静态生成，每次请求都重新获取数据
-export const dynamic = 'force-dynamic'
-export const revalidate = 0
-
 export default function ProjectsPage() {
   const projects = getAllProjects() as any[]
 

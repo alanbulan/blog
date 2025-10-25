@@ -2,10 +2,6 @@ import Link from 'next/link'
 import { ArrowRight, Sparkles, Code2, Database, Palette, Lightbulb, GitBranch, Cloud, Boxes } from 'lucide-react'
 import { getHomepage, getAllSkills, getAllProjects } from '@/lib/content'
 
-// 禁用静态生成，每次请求都重新获取数据
-export const dynamic = 'force-dynamic'
-export const revalidate = 0
-
 const iconMap: Record<string, any> = {
   Code2,
   Database,

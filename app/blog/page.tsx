@@ -2,10 +2,6 @@
 import { Calendar, Clock, Tag } from 'lucide-react'
 import { getAllBlogPosts } from '@/lib/content'
 
-// 禁用静态生成，每次请求都重新获取数据
-export const dynamic = 'force-dynamic'
-export const revalidate = 0
-
 export default function BlogPage() {
   const blogPosts = getAllBlogPosts() as any[]
   const categories = ['全部', ...Array.from(new Set(blogPosts.map((p: any) => p.category)))]
@@ -63,7 +59,7 @@ export default function BlogPage() {
               <div className="flex items-center gap-4 text-xs text-neutral-500">
                 <span className="flex items-center gap-1">
                   <Calendar className="w-4 h-4" />
-                  {post.date}
+                  {typeof post.date === 'string' ? post.date : new Date(post.date).toLocaleDateString('zh-CN')}
                 </span>
                 <span className="flex items-center gap-1">
                   <Clock className="w-4 h-4" />

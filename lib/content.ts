@@ -55,9 +55,9 @@ export function getAllBlogPosts() {
         body: content,
         slug: filename.replace(/\.md$/, ''),
         id: filename.replace(/\.md$/, '')
-      }
+      } as any
     })
-    .filter(post => post.published !== false)
+    .filter((post: any) => post.published !== false)
     .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())
   
   return posts
@@ -80,9 +80,9 @@ export function getAllProjects() {
         body: content,
         slug: filename.replace(/\.md$/, ''),
         id: filename.replace(/\.md$/, '')
-      }
+      } as any
     })
-    .filter(project => project.visible !== false)
+    .filter((project: any) => project.visible !== false)
     .sort((a: any, b: any) => (a.order || 999) - (b.order || 999))
   
   return projects

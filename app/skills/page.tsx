@@ -2,10 +2,6 @@
 import { Code2, Palette, Database, Cloud, GitBranch, Boxes } from 'lucide-react'
 import { getAllSkills } from '@/lib/content'
 
-// 禁用静态生成，每次请求都重新获取数据
-export const dynamic = 'force-dynamic'
-export const revalidate = 0
-
 const iconMap: Record<string, any> = {
   Code2,
   Palette,
