@@ -1,3 +1,5 @@
+site_url: https://blog-37u.pages.dev
+
 backend:
   name: github
   repo: alanbulan/blog
