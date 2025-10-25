@@ -1,12 +1,12 @@
 import Link from 'next/link'
-import { ArrowRight, Sparkles, Zap, Target, Rocket } from 'lucide-react'
+import { ArrowRight, Sparkles, Code2, Database, Palette, Lightbulb } from 'lucide-react'
 import { getHomepage } from '@/lib/content'
 
 const skills = [
-  { icon: Zap, title: '前端开发', color: 'from-blue-500 to-cyan-500' },
-  { icon: Target, title: '后端架构', color: 'from-purple-500 to-pink-500' },
-  { icon: Sparkles, title: 'UI/UX 设计', color: 'from-orange-500 to-red-500' },
-  { icon: Rocket, title: '产品思维', color: 'from-green-500 to-emerald-500' },
+  { icon: Code2, title: '前端开发', color: 'from-blue-500 to-cyan-500', description: 'React · Next.js · TypeScript' },
+  { icon: Database, title: '后端架构', color: 'from-purple-500 to-pink-500', description: 'Node.js · PostgreSQL · Redis' },
+  { icon: Palette, title: 'UI/UX 设计', color: 'from-orange-500 to-red-500', description: 'Figma · 设计系统 · 交互设计' },
+  { icon: Lightbulb, title: '产品思维', color: 'from-green-500 to-emerald-500', description: '用户体验 · 产品设计 · 创新' },
 ]
 
 const featuredProjects = [
@@ -81,11 +81,11 @@ export default function Home() {
                 className="glass-effect rounded-2xl p-8 card-hover group"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className={`w-16 h-16 bg-gradient-to-br ${skill.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                  <Icon className="w-8 h-8 text-white" />
+                <div className={`w-16 h-16 bg-gradient-to-br ${skill.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-6 transition-all shadow-lg`}>
+                  <Icon className="w-8 h-8 text-white drop-shadow-lg" strokeWidth={2.5} />
                 </div>
                 <h3 className="text-xl font-bold text-neutral-800 mb-2">{skill.title}</h3>
-                <p className="text-neutral-600 text-sm">精通多项技能，持续精进</p>
+                <p className="text-neutral-600 text-sm leading-relaxed">{skill.description}</p>
               </div>
             )
           })}
