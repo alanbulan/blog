@@ -1,19 +1,19 @@
 ---
-title: Design System Pro
-description: 企业级设计系统解决方案，包含200+精心设计的组件、完整的设计规范和丰富的交互动效。支持主题定制、深色模式、响应式设计，已在多个大型项目中应用。
+title: 小说阅读器
+description: 基于 Next.js 15 和 React 19 构建的全功能小说阅读器，提供行业标准的阅读体验和用户界面。支持书籍管理、阅读进度同步、书签收藏等功能。
 gradient: from-purple-500 via-pink-500 to-rose-500
 tags:
-  - React
-  - Design System
-  - Storybook
-  - Figma
-github: https://github.com/alanbulan/design-system-pro
-demo: https://design-system-pro.demo
-stars: 890
+  - Next.js 15
+  - React 19
+  - TypeScript
+  - Reader
+github: https://github.com/alanbulan/novel-reader
+demo: 
+stars: 1
 order: 2
 visible: true
 ---
 
-# Design System Pro
+# 小说阅读器
 
-企业级设计系统解决方案，包含完整的组件库和设计规范。
+基于 Next.js 15 和 React 19 构建的全功能小说阅读器。

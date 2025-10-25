@@ -1,19 +1,19 @@
 ---
-title: 实时协作白板
-description: 支持多人实时协作的在线白板应用，提供丰富的绘图工具、图形库和模板。采用WebSocket实现实时同步，支持无限画布、版本历史和团队管理。
+title: 水资源信息管理系统
+description: 基于 Spring Boot + React 的现代化水资源监测数据管理系统。提供水资源监测、数据分析、报表生成等功能，支持实时数据采集和可视化展示。
 gradient: from-green-500 via-emerald-500 to-teal-500
 tags:
+  - Java
+  - Spring Boot
   - React
-  - WebSocket
-  - Canvas
-  - Real-time
-github: https://github.com/alanbulan/collab-whiteboard
-demo: https://whiteboard.demo
-stars: 670
+  - Data Monitoring
+github: https://github.com/alanbulan/watersystem
+demo: 
+stars: 1
 order: 4
 visible: true
 ---
 
-# 实时协作白板
+# 水资源信息管理系统
 
-支持多人实时协作的在线白板应用。
+基于 Spring Boot + React 的现代化水资源监测数据管理系统。

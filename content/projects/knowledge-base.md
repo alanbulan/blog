@@ -1,19 +1,19 @@
 ---
-title: 个人知识管理系统
-description: 强大的知识管理和笔记系统，支持Markdown编辑、双向链接、标签分类和全文搜索。采用本地优先策略，数据完全由用户掌控，支持多端同步。
+title: 灾害风险管理平台
+description: 一个综合性的灾害风险管理平台，集成了风险评估、实时监测、预警发布、应急响应等功能。基于PostgreSQL/PLpgSQL开发，提供强大的数据分析和预测能力。
 gradient: from-yellow-500 via-orange-500 to-red-500
 tags:
-  - Electron
-  - React
-  - SQLite
-  - Markdown
-github: https://github.com/alanbulan/knowledge-base
-demo: https://knowledge-base.demo
-stars: 980
+  - PostgreSQL
+  - PLpgSQL
+  - Risk Management
+  - Disaster Prevention
+github: https://github.com/alanbulan/BS
+demo: 
+stars: 0
 order: 6
 visible: true
 ---
 
-# 个人知识管理系统
+# 灾害风险管理平台
 
-强大的知识管理和笔记系统。
+一个综合性的灾害风险管理平台。
