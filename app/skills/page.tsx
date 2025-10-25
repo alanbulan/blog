@@ -51,7 +51,7 @@ export default function SkillsPage() {
 
               {/* Skills List */}
               <div className="space-y-4">
-                {category.skills.map((skill) => (
+                {category.skills.map((skill: any) => (
                   <div key={skill.name} className="space-y-2">
                     <div className="flex items-center justify-between">
                       <span className="font-medium text-neutral-700">{skill.name}</span>
