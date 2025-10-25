@@ -1,39 +1,42 @@
 'use client'
 
 import { Mail, Github, Twitter, Linkedin, MessageSquare, Send } from 'lucide-react'
-
-const contactMethods = [
-  {
-    icon: Mail,
-    title: '电子邮件',
-    value: 'contact@alanbulan.com',
-    href: 'mailto:contact@alanbulan.com',
-    color: 'from-blue-500 to-cyan-500',
-  },
-  {
-    icon: Github,
-    title: 'GitHub',
-    value: '@alanbulan',
-    href: 'https://github.com/alanbulan',
-    color: 'from-gray-700 to-gray-900',
-  },
-  {
-    icon: Twitter,
-    title: 'Twitter',
-    value: '@alanbulan',
-    href: 'https://twitter.com/alanbulan',
-    color: 'from-sky-400 to-blue-500',
-  },
-  {
-    icon: Linkedin,
-    title: 'LinkedIn',
-    value: 'AlanBulan',
-    href: 'https://linkedin.com/in/alanbulan',
-    color: 'from-blue-600 to-blue-700',
-  },
-]
+import { getSocial } from '@/lib/content'
 
 export default function ContactPage() {
+  const social = getSocial()
+  
+  const contactMethods = [
+    {
+      icon: Mail,
+      title: '电子邮件',
+      value: social.email,
+      href: `mailto:${social.email}`,
+      color: 'from-blue-500 to-cyan-500',
+    },
+    {
+      icon: Github,
+      title: 'GitHub',
+      value: `@${social.github.split('/').pop()}`,
+      href: social.github,
+      color: 'from-gray-700 to-gray-900',
+    },
+    {
+      icon: Twitter,
+      title: 'Twitter',
+      value: `@${social.twitter.split('/').pop()}`,
+      href: social.twitter,
+      color: 'from-sky-400 to-blue-500',
+    },
+    {
+      icon: Linkedin,
+      title: 'LinkedIn',
+      value: social.linkedin.split('/').pop() || 'LinkedIn',
+      href: social.linkedin,
+      color: 'from-blue-600 to-blue-700',
+    },
+  ]
+
   return (
     <div className="max-w-4xl mx-auto space-y-12">
       {/* Header */}

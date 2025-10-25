@@ -1,37 +1,31 @@
 import Link from 'next/link'
-import { ArrowRight, Sparkles, Code2, Database, Palette, Lightbulb } from 'lucide-react'
-import { getHomepage } from '@/lib/content'
+import { ArrowRight, Sparkles, Code2, Database, Palette, Lightbulb, GitBranch, Cloud, Boxes } from 'lucide-react'
+import { getHomepage, getAllSkills, getAllProjects } from '@/lib/content'
 
-const skills = [
-  { icon: Code2, title: '前端开发', color: 'from-blue-500 to-cyan-500', description: 'React · Next.js · TypeScript' },
-  { icon: Database, title: '后端架构', color: 'from-purple-500 to-pink-500', description: 'Node.js · PostgreSQL · Redis' },
-  { icon: Palette, title: 'UI/UX 设计', color: 'from-orange-500 to-red-500', description: 'Figma · 设计系统 · 交互设计' },
-  { icon: Lightbulb, title: '产品思维', color: 'from-green-500 to-emerald-500', description: '用户体验 · 产品设计 · 创新' },
-]
-
-const featuredProjects = [
-  {
-    title: '智能任务管理系统',
-    description: '基于AI的智能任务分配与优先级管理平台',
-    tags: ['Next.js', 'TypeScript', 'AI'],
-    gradient: 'from-blue-500 to-purple-600',
-  },
-  {
-    title: '创意设计作品集',
-    description: '精选UI/UX设计案例与交互动效展示',
-    tags: ['Figma', 'Design System', 'Animation'],
-    gradient: 'from-pink-500 to-orange-500',
-  },
-  {
-    title: '开源项目贡献',
-    description: '活跃于开源社区，贡献优质代码与文档',
-    tags: ['Open Source', 'GitHub', 'Community'],
-    gradient: 'from-green-500 to-teal-500',
-  },
-]
+const iconMap: Record<string, any> = {
+  Code2,
+  Database,
+  Palette,
+  Lightbulb,
+  GitBranch,
+  Cloud,
+  Boxes
+}
 
 export default function Home() {
   const homepage = getHomepage()
+  const allSkills = getAllSkills()
+  const allProjects = getAllProjects() as any[]
+  
+  // 首页显示前4个技能
+  const skills = allSkills.slice(0, 4).map((skill: any) => ({
+    ...skill,
+    icon: iconMap[skill.icon] || Code2,
+    description: skill.skills?.slice(0, 3).map((s: any) => s.name).join(' · ') || '精通多项技能'
+  }))
+  
+  // 首页显示前3个项目
+  const featuredProjects = allProjects.slice(0, 3)
   
   return (
     <div className="space-y-20">
@@ -117,7 +111,7 @@ export default function Home() {
                 <h3 className="text-xl font-bold text-neutral-800 mb-2">{project.title}</h3>
                 <p className="text-neutral-600 text-sm mb-4">{project.description}</p>
                 <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
+                  {project.tags.map((tag: string) => (
                     <span
                       key={tag}
                       className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-xs font-medium"
