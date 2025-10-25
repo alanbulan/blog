@@ -3,7 +3,7 @@ backend:
   repo: alanbulan/blog
   branch: main
   base_url: https://alanbulan-blog.1308048843qq.workers.dev
-  auth_endpoint: api/auth
+  auth_endpoint: /api/auth
 
 # 媒体文件配置
 media_folder: "public/images/uploads"
