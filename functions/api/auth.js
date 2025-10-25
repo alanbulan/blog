@@ -3,10 +3,14 @@ export async function onRequest(context) {
   const { request, env } = context;
   const url = new URL(request.url);
 
-  // GitHub OAuth配置
-  const clientId = 'Ov23112S9WV1YVThzgrU';
-  const clientSecret = '48dbaeffd9af67bd56576e4de667c17681419f8';
+  // GitHub OAuth配置 - 从环境变量读取
+  const clientId = env.GITHUB_CLIENT_ID;
+  const clientSecret = env.GITHUB_CLIENT_SECRET;
   const redirectUri = `${url.origin}/api/auth/callback`;
+  
+  if (!clientId || !clientSecret) {
+    return new Response('OAuth credentials not configured', { status: 500 });
+  }
 
   // 处理回调
   if (url.pathname === '/api/auth/callback') {
