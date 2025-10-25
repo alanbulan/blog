@@ -1,8 +1,12 @@
-import { Heart, Coffee, Code2, Palette, Rocket, Book } from 'lucide-react'
+import { Code, Palette, Rocket, Users, Heart, Coffee, Music, Camera, Book, Plane } from 'lucide-react'
 import { getAbout, getProfile } from '@/lib/content'
 
+// 禁用静态生成，每次请求都重新获取数据
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 const iconMap: Record<string, any> = {
-  Code2,
+  Code,
   Palette,
   Book,
   Rocket,

@@ -2,6 +2,10 @@
 import { Calendar, Clock, Tag } from 'lucide-react'
 import { getAllBlogPosts } from '@/lib/content'
 
+// 禁用静态生成，每次请求都重新获取数据
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export default function BlogPage() {
   const blogPosts = getAllBlogPosts() as any[]
   const categories = ['全部', ...Array.from(new Set(blogPosts.map((p: any) => p.category)))]
