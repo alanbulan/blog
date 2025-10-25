@@ -1,9 +1,9 @@
 backend:
-  name: git-gateway
-  branch: main # 你的主分支名称
-
-# 本地开发时使用
-local_backend: true
+  name: github
+  repo: alanbulan/blog
+  branch: main
+  base_url: https://blog-37u.pages.dev
+  auth_endpoint: api/auth
 
 # 媒体文件配置
 media_folder: "public/images/uploads"
