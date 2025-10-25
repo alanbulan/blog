@@ -6,6 +6,26 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  safelist: [
+    // 技能和项目渐变色
+    'from-blue-500', 'to-cyan-500',
+    'from-purple-500', 'via-pink-500', 'to-rose-500',
+    'from-orange-500', 'via-red-500', 'to-pink-500',
+    'from-green-500', 'via-emerald-500', 'to-teal-500',
+    'from-indigo-500', 'via-purple-500', 'to-pink-500',
+    'from-yellow-500', 'via-orange-500', 'to-red-500',
+    'from-teal-500', 'to-blue-500',
+    'from-pink-500', 'to-purple-500',
+    'from-cyan-500', 'to-teal-500',
+    'from-gray-700', 'to-gray-900',
+    'from-sky-400', 'to-blue-500',
+    'from-blue-600', 'to-blue-700',
+    'from-blue-500', 'to-purple-600',
+    // 确保所有渐变方向都被包含
+    {
+      pattern: /bg-gradient-to-(r|br|b|bl|l|tl|t|tr)/,
+    },
+  ],
   theme: {
     extend: {
       colors: {
