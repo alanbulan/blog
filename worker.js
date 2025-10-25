@@ -22,7 +22,7 @@ export default {
     
     // 处理 OAuth 认证路由
     if (url.pathname === '/api/auth') {
-      const client_id = env.GITHUB_CLIENT_ID;
+      const client_id = env.GITHUB_OAUTH_ID || env.GITHUB_CLIENT_ID;
       try {
         const redirectUrl = new URL('https://github.com/login/oauth/authorize');
         redirectUrl.searchParams.set('client_id', client_id);
@@ -40,8 +40,8 @@ export default {
     
     // 处理 OAuth 回调
     if (url.pathname === '/api/callback') {
-      const client_id = env.GITHUB_CLIENT_ID;
-      const client_secret = env.GITHUB_CLIENT_SECRET;
+      const client_id = env.GITHUB_OAUTH_ID || env.GITHUB_CLIENT_ID;
+      const client_secret = env.GITHUB_OAUTH_SECRET || env.GITHUB_CLIENT_SECRET;
       
       try {
         const code = url.searchParams.get('code');
