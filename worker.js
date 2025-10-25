@@ -1,15 +1,91 @@
-// Cloudflare Worker - 反向代理到 Pages
+// Cloudflare Worker - OAuth + 反向代理
+function renderBody(status, content) {
+  const html = `
+  <script>
+    const receiveMessage = (message) => {
+      window.opener.postMessage(
+        'authorization:github:${status}:${JSON.stringify(content)}',
+        message.origin
+      );
+      window.removeEventListener("message", receiveMessage, false);
+    }
+    window.addEventListener("message", receiveMessage, false);
+    window.opener.postMessage("authorizing:github", "*");
+  </script>
+  `;
+  return new Blob([html]);
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     
-    // 目标 Pages 项目的 URL
-    const pagesUrl = 'https://blog-37u.pages.dev';
+    // 处理 OAuth 认证路由
+    if (url.pathname === '/api/auth') {
+      const client_id = env.GITHUB_CLIENT_ID;
+      try {
+        const redirectUrl = new URL('https://github.com/login/oauth/authorize');
+        redirectUrl.searchParams.set('client_id', client_id);
+        redirectUrl.searchParams.set('redirect_uri', url.origin + '/api/callback');
+        redirectUrl.searchParams.set('scope', 'repo user');
+        redirectUrl.searchParams.set(
+          'state',
+          crypto.getRandomValues(new Uint8Array(12)).join('')
+        );
+        return Response.redirect(redirectUrl.href, 301);
+      } catch (error) {
+        return new Response(error.message, { status: 500 });
+      }
+    }
     
-    // 构建新的请求URL
+    // 处理 OAuth 回调
+    if (url.pathname === '/api/callback') {
+      const client_id = env.GITHUB_CLIENT_ID;
+      const client_secret = env.GITHUB_CLIENT_SECRET;
+      
+      try {
+        const code = url.searchParams.get('code');
+        const response = await fetch(
+          'https://github.com/login/oauth/access_token',
+          {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json',
+              'user-agent': 'cloudflare-worker-github-oauth',
+              'accept': 'application/json',
+            },
+            body: JSON.stringify({ client_id, client_secret, code }),
+          }
+        );
+        const result = await response.json();
+        
+        if (result.error) {
+          return new Response(renderBody('error', result), {
+            headers: { 'content-type': 'text/html;charset=UTF-8' },
+            status: 401,
+          });
+        }
+        
+        const token = result.access_token;
+        const provider = 'github';
+        const responseBody = renderBody('success', { token, provider });
+        
+        return new Response(responseBody, {
+          headers: { 'content-type': 'text/html;charset=UTF-8' },
+          status: 200,
+        });
+      } catch (error) {
+        return new Response(error.message, {
+          headers: { 'content-type': 'text/html;charset=UTF-8' },
+          status: 500,
+        });
+      }
+    }
+    
+    // 反向代理到 Pages
+    const pagesUrl = 'https://blog-37u.pages.dev';
     const targetUrl = new URL(url.pathname + url.search, pagesUrl);
     
-    // 创建新请求
     const modifiedRequest = new Request(targetUrl, {
       method: request.method,
       headers: request.headers,
@@ -17,13 +93,8 @@ export default {
       redirect: 'manual'
     });
     
-    // 获取响应
     const response = await fetch(modifiedRequest);
-    
-    // 创建新响应
     const modifiedResponse = new Response(response.body, response);
-    
-    // 添加CORS头（如果需要）
     modifiedResponse.headers.set('Access-Control-Allow-Origin', '*');
     
     return modifiedResponse;
