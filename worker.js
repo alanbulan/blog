@@ -98,12 +98,22 @@ export default {
       method: request.method,
       headers: request.headers,
       body: request.body,
-      redirect: 'manual'
+      redirect: 'manual',
+      cf: {
+        // 禁用Cloudflare缓存，始终获取最新内容
+        cacheEverything: false,
+        cacheTtl: 0
+      }
     });
     
     const response = await fetch(modifiedRequest);
     const modifiedResponse = new Response(response.body, response);
+    
+    // 设置CORS和缓存控制头
     modifiedResponse.headers.set('Access-Control-Allow-Origin', '*');
+    modifiedResponse.headers.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+    modifiedResponse.headers.set('Pragma', 'no-cache');
+    modifiedResponse.headers.set('Expires', '0');
     
     return modifiedResponse;
   }
