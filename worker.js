@@ -1,19 +1,26 @@
 // Cloudflare Worker - OAuth + 反向代理
 function renderBody(status, content) {
   const html = `
-  <script>
-    const receiveMessage = (message) => {
-      window.opener.postMessage(
-        'authorization:github:${status}:${JSON.stringify(content)}',
-        message.origin
-      );
-      window.removeEventListener("message", receiveMessage, false);
-    }
-    window.addEventListener("message", receiveMessage, false);
-    window.opener.postMessage("authorizing:github", "*");
-  </script>
+  <!DOCTYPE html>
+  <html>
+  <head><title>Authorizing...</title></head>
+  <body>
+    <p>Authorizing with GitHub...</p>
+    <script>
+      const receiveMessage = (message) => {
+        window.opener.postMessage(
+          'authorization:github:${status}:${JSON.stringify(content)}',
+          message.origin
+        );
+        window.removeEventListener("message", receiveMessage, false);
+      }
+      window.addEventListener("message", receiveMessage, false);
+      window.opener.postMessage("authorizing:github", "*");
+    </script>
+  </body>
+  </html>
   `;
-  return new Blob([html]);
+  return html;
 }
 
 export default {
@@ -23,6 +30,15 @@ export default {
     // 处理 OAuth 认证路由
     if (url.pathname === '/api/auth') {
       const client_id = env.GITHUB_OAUTH_ID || env.GITHUB_CLIENT_ID;
+      
+      // 调试：如果没有client_id，返回错误
+      if (!client_id) {
+        return new Response('Missing GITHUB_OAUTH_ID or GITHUB_CLIENT_ID environment variable', { 
+          status: 500,
+          headers: { 'Content-Type': 'text/plain' }
+        });
+      }
+      
       try {
         const redirectUrl = new URL('https://github.com/login/oauth/authorize');
         redirectUrl.searchParams.set('client_id', client_id);
