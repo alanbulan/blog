@@ -94,26 +94,35 @@ export default {
     const pagesUrl = 'https://blog-37u.pages.dev';
     const targetUrl = new URL(url.pathname + url.search, pagesUrl);
     
-    const modifiedRequest = new Request(targetUrl, {
+    // 添加cache-busting参数强制获取最新内容
+    const cacheBuster = `?_t=${Date.now()}`;
+    const targetUrlWithBuster = new URL(url.pathname + url.search + (url.search ? '&' : '?') + `_t=${Date.now()}`, pagesUrl);
+    
+    const modifiedRequest = new Request(targetUrlWithBuster, {
       method: request.method,
       headers: request.headers,
       body: request.body,
-      redirect: 'manual',
+      redirect: 'manual'
+    });
+    
+    // 直接fetch，不使用任何缓存
+    const response = await fetch(modifiedRequest, {
       cf: {
-        // 禁用Cloudflare缓存，始终获取最新内容
         cacheEverything: false,
-        cacheTtl: 0
+        cacheTtl: 0,
+        cacheTtlByStatus: {}
       }
     });
     
-    const response = await fetch(modifiedRequest);
     const modifiedResponse = new Response(response.body, response);
     
-    // 设置CORS和缓存控制头
+    // 设置严格的不缓存头
     modifiedResponse.headers.set('Access-Control-Allow-Origin', '*');
-    modifiedResponse.headers.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+    modifiedResponse.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');
     modifiedResponse.headers.set('Pragma', 'no-cache');
     modifiedResponse.headers.set('Expires', '0');
+    modifiedResponse.headers.delete('ETag');
+    modifiedResponse.headers.delete('Last-Modified');
     
     return modifiedResponse;
   }
