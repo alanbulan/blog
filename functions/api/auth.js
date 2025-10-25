@@ -6,7 +6,10 @@ export async function onRequest(context) {
   // GitHub OAuth配置 - 从环境变量读取
   const clientId = env.GITHUB_CLIENT_ID;
   const clientSecret = env.GITHUB_CLIENT_SECRET;
-  const redirectUri = `${url.origin}/api/auth/callback`;
+  
+  // 使用请求的origin作为回调地址（支持Workers代理）
+  const origin = request.headers.get('origin') || url.origin;
+  const redirectUri = `${origin}/api/auth/callback`;
   
   if (!clientId || !clientSecret) {
     return new Response('OAuth credentials not configured', { status: 500 });
