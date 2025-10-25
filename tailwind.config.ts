@@ -21,6 +21,9 @@ const config: Config = {
     'from-sky-400', 'to-blue-500',
     'from-blue-600', 'to-blue-700',
     'from-blue-500', 'to-purple-600',
+    // 兴趣爱好额外的渐变色
+    'from-amber-500', 'to-yellow-500',
+    'from-rose-500', 'to-pink-500',
     // 确保所有渐变方向都被包含
     {
       pattern: /bg-gradient-to-(r|br|b|bl|l|tl|t|tr)/,
