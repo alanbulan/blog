@@ -3,14 +3,17 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import { getProfile } from '@/lib/content'
+import { getProfile, getHomepage } from '@/lib/content'
 
 const inter = Inter({ subsets: ['latin'] })
 
+const profile = getProfile()
+const homepage = getHomepage()
+
 export const metadata: Metadata = {
-  title: '阿岚不懒 | AlanBulan - 全能型创作者',
-  description: '阿岚不懒的个人博客 - 分享技术、设计、创意与生活',
-  keywords: '阿岚不懒, AlanBulan, 博客, 技术, 设计, 全栈开发',
+  title: `${profile.name} | ${profile.englishName} - ${profile.bio.split('，')[0]}`,
+  description: `${profile.bio} ${homepage.subtitle}`,
+  keywords: `${profile.name}, ${profile.englishName}, 博客, 技术, 设计, 全栈开发, 产品设计`,
 }
 
 export default function RootLayout({
@@ -18,8 +21,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const profile = getProfile()
-  
   return (
     <html lang="zh-CN">
       <body className={inter.className}>
