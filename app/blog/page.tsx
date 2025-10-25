@@ -1,73 +1,11 @@
-'use client'
 
 import { Calendar, Clock, Tag } from 'lucide-react'
-
-const blogPosts = [
-  {
-    id: 1,
-    title: '构建现代化的全栈应用：Next.js 14 最佳实践',
-    excerpt: '深入探讨Next.js 14的新特性，包括Server Components、App Router等，分享实战经验与最佳实践。',
-    date: '2024-01-15',
-    readTime: '8分钟',
-    category: '技术',
-    tags: ['Next.js', 'React', 'TypeScript'],
-    gradient: 'from-blue-500 to-cyan-500',
-  },
-  {
-    id: 2,
-    title: 'UI/UX设计系统搭建指南：从零到一',
-    excerpt: '如何构建一套完整的设计系统？本文将分享设计系统的核心要素、组件库搭建和团队协作经验。',
-    date: '2024-01-10',
-    readTime: '12分钟',
-    category: '设计',
-    tags: ['Design System', 'UI/UX', 'Figma'],
-    gradient: 'from-purple-500 to-pink-500',
-  },
-  {
-    id: 3,
-    title: 'TypeScript 高级类型技巧与实战应用',
-    excerpt: '掌握TypeScript的高级类型系统，提升代码质量和开发效率，附带真实项目案例分析。',
-    date: '2024-01-05',
-    readTime: '10分钟',
-    category: '技术',
-    tags: ['TypeScript', '类型系统', '最佳实践'],
-    gradient: 'from-orange-500 to-red-500',
-  },
-  {
-    id: 4,
-    title: '微服务架构实践：从单体到分布式',
-    excerpt: '分享微服务架构的设计思路、技术选型和实施经验，包括服务拆分、通信机制和监控运维。',
-    date: '2023-12-28',
-    readTime: '15分钟',
-    category: '架构',
-    tags: ['微服务', '架构设计', 'DevOps'],
-    gradient: 'from-green-500 to-emerald-500',
-  },
-  {
-    id: 5,
-    title: '打造高性能Web应用：性能优化实战',
-    excerpt: '从加载速度、运行时性能到用户体验，全方位优化Web应用性能，提升用户满意度。',
-    date: '2023-12-20',
-    readTime: '11分钟',
-    category: '技术',
-    tags: ['性能优化', 'Web开发', '用户体验'],
-    gradient: 'from-teal-500 to-blue-500',
-  },
-  {
-    id: 6,
-    title: '产品思维：技术人员的产品设计思考',
-    excerpt: '作为技术人员如何培养产品思维？分享从用户需求到产品落地的完整思考过程。',
-    date: '2023-12-15',
-    readTime: '9分钟',
-    category: '产品',
-    tags: ['产品设计', '用户体验', '思维模型'],
-    gradient: 'from-pink-500 to-purple-500',
-  },
-]
-
-const categories = ['全部', '技术', '设计', '架构', '产品']
+import { getAllBlogPosts } from '@/lib/content'
 
 export default function BlogPage() {
+  const blogPosts = getAllBlogPosts() as any[]
+  const categories = ['全部', ...Array.from(new Set(blogPosts.map((p: any) => p.category)))]
+
   return (
     <div className="max-w-6xl mx-auto space-y-12">
       {/* Header */}
@@ -130,7 +68,7 @@ export default function BlogPage() {
               </div>
 
               <div className="flex flex-wrap gap-2">
-                {post.tags.map((tag) => (
+                {post.tags.map((tag: string) => (
                   <span
                     key={tag}
                     className="flex items-center gap-1 px-3 py-1 bg-neutral-100 text-neutral-600 rounded-full text-xs"

@@ -1,86 +1,22 @@
-'use client'
 
 import { Code2, Palette, Database, Cloud, GitBranch, Boxes } from 'lucide-react'
+import { getAllSkills } from '@/lib/content'
 
-const skillCategories = [
-  {
-    title: '前端开发',
-    icon: Code2,
-    color: 'from-blue-500 to-cyan-500',
-    skills: [
-      { name: 'React / Next.js', level: 95 },
-      { name: 'TypeScript', level: 92 },
-      { name: 'Vue.js', level: 88 },
-      { name: 'TailwindCSS', level: 95 },
-      { name: 'HTML/CSS', level: 98 },
-      { name: 'JavaScript', level: 96 },
-    ],
-  },
-  {
-    title: '后端开发',
-    icon: Database,
-    color: 'from-green-500 to-emerald-500',
-    skills: [
-      { name: 'Node.js', level: 90 },
-      { name: 'Python', level: 85 },
-      { name: 'PostgreSQL', level: 88 },
-      { name: 'MongoDB', level: 86 },
-      { name: 'Redis', level: 82 },
-      { name: 'GraphQL', level: 80 },
-    ],
-  },
-  {
-    title: 'UI/UX 设计',
-    icon: Palette,
-    color: 'from-purple-500 to-pink-500',
-    skills: [
-      { name: 'Figma', level: 93 },
-      { name: 'Adobe XD', level: 88 },
-      { name: 'Design System', level: 90 },
-      { name: 'Prototyping', level: 92 },
-      { name: 'User Research', level: 85 },
-      { name: 'Interaction Design', level: 89 },
-    ],
-  },
-  {
-    title: '云服务 & DevOps',
-    icon: Cloud,
-    color: 'from-orange-500 to-red-500',
-    skills: [
-      { name: 'AWS', level: 82 },
-      { name: 'Cloudflare', level: 88 },
-      { name: 'Docker', level: 85 },
-      { name: 'CI/CD', level: 83 },
-      { name: 'Nginx', level: 80 },
-      { name: 'Linux', level: 84 },
-    ],
-  },
-  {
-    title: '版本控制',
-    icon: GitBranch,
-    color: 'from-teal-500 to-blue-500',
-    skills: [
-      { name: 'Git', level: 95 },
-      { name: 'GitHub Actions', level: 88 },
-      { name: 'GitLab CI', level: 82 },
-    ],
-  },
-  {
-    title: '其他技能',
-    icon: Boxes,
-    color: 'from-indigo-500 to-purple-500',
-    skills: [
-      { name: '微服务架构', level: 85 },
-      { name: '性能优化', level: 90 },
-      { name: '单元测试', level: 86 },
-      { name: '敏捷开发', level: 88 },
-      { name: '技术写作', level: 92 },
-      { name: '团队协作', level: 94 },
-    ],
-  },
-]
+const iconMap: Record<string, any> = {
+  Code2,
+  Palette,
+  Database,
+  Cloud,
+  GitBranch,
+  Boxes
+}
 
 export default function SkillsPage() {
+  const skillCategories = getAllSkills().map((skill: any) => ({
+    ...skill,
+    icon: iconMap[skill.icon] || Code2
+  }))
+
   return (
     <div className="max-w-7xl mx-auto space-y-12">
       {/* Header */}
