@@ -31,14 +31,6 @@ export default {
     if (url.pathname === '/api/auth') {
       const client_id = env.GITHUB_OAUTH_ID || env.GITHUB_CLIENT_ID;
       
-      // 调试：如果没有client_id，返回错误
-      if (!client_id) {
-        return new Response('Missing GITHUB_OAUTH_ID or GITHUB_CLIENT_ID environment variable', { 
-          status: 500,
-          headers: { 'Content-Type': 'text/plain' }
-        });
-      }
-      
       try {
         const redirectUrl = new URL('https://github.com/login/oauth/authorize');
         redirectUrl.searchParams.set('client_id', client_id);
