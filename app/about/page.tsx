@@ -75,6 +75,7 @@ export default function AboutPage() {
         <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
           {about.interests.map((interest: any, index: number) => {
             const Icon = iconMap[interest.icon]
+            if (!Icon) return null
             return (
               <div
                 key={interest.title}
@@ -82,7 +83,7 @@ export default function AboutPage() {
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className={`w-16 h-16 mx-auto bg-gradient-to-br ${interest.color} rounded-xl flex items-center justify-center mb-4`}>
-                  <Icon className="w-8 h-8 text-white" />
+                  <Icon className="w-8 h-8 text-white" strokeWidth={2} />
                 </div>
                 <h3 className="font-bold text-neutral-800">{interest.title}</h3>
               </div>
