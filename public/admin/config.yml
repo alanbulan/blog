@@ -1,0 +1,175 @@
+backend:
+  name: git-gateway
+  branch: main # 你的主分支名称
+
+# 本地开发时使用
+local_backend: true
+
+# 媒体文件配置
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+# 发布模式
+publish_mode: editorial_workflow
+
+# 中文界面
+locale: 'zh_Hans'
+
+# 内容集合配置
+collections:
+  # 博客文章
+  - name: "blog"
+    label: "博客文章"
+    folder: "content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "标题", name: "title", widget: "string"}
+      - {label: "摘要", name: "excerpt", widget: "text"}
+      - {label: "发布日期", name: "date", widget: "datetime", format: "YYYY-MM-DD"}
+      - {label: "阅读时长", name: "readTime", widget: "string", default: "5分钟"}
+      - label: "分类"
+        name: "category"
+        widget: "select"
+        options: ["技术", "设计", "架构", "产品", "生活"]
+      - label: "标签"
+        name: "tags"
+        widget: "list"
+        allow_add: true
+      - label: "渐变色"
+        name: "gradient"
+        widget: "select"
+        options:
+          - {label: "蓝色", value: "from-blue-500 to-cyan-500"}
+          - {label: "紫色", value: "from-purple-500 to-pink-500"}
+          - {label: "橙色", value: "from-orange-500 to-red-500"}
+          - {label: "绿色", value: "from-green-500 to-emerald-500"}
+          - {label: "青色", value: "from-teal-500 to-blue-500"}
+      - {label: "正文内容", name: "body", widget: "markdown"}
+      - {label: "发布", name: "published", widget: "boolean", default: true}
+
+  # 项目展示
+  - name: "projects"
+    label: "项目展示"
+    folder: "content/projects"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "项目名称", name: "title", widget: "string"}
+      - {label: "项目描述", name: "description", widget: "text"}
+      - label: "渐变色"
+        name: "gradient"
+        widget: "select"
+        options:
+          - {label: "蓝青色", value: "from-blue-500 via-cyan-500 to-teal-500"}
+          - {label: "紫粉色", value: "from-purple-500 via-pink-500 to-rose-500"}
+          - {label: "橙红色", value: "from-orange-500 via-red-500 to-pink-500"}
+          - {label: "绿青色", value: "from-green-500 via-emerald-500 to-teal-500"}
+          - {label: "靛紫色", value: "from-indigo-500 via-purple-500 to-pink-500"}
+          - {label: "黄橙色", value: "from-yellow-500 via-orange-500 to-red-500"}
+      - label: "技术标签"
+        name: "tags"
+        widget: "list"
+        allow_add: true
+      - {label: "GitHub链接", name: "github", widget: "string", required: false}
+      - {label: "演示链接", name: "demo", widget: "string", required: false}
+      - {label: "Star数量", name: "stars", widget: "number", default: 0}
+      - {label: "排序", name: "order", widget: "number", default: 1}
+      - {label: "显示", name: "visible", widget: "boolean", default: true}
+
+  # 技能配置
+  - name: "skills"
+    label: "技能管理"
+    folder: "content/skills"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "分类名称", name: "title", widget: "string"}
+      - label: "图标"
+        name: "icon"
+        widget: "select"
+        options: ["Code2", "Database", "Palette", "Cloud", "GitBranch", "Boxes"]
+      - label: "渐变色"
+        name: "color"
+        widget: "select"
+        options:
+          - {label: "蓝色", value: "from-blue-500 to-cyan-500"}
+          - {label: "绿色", value: "from-green-500 to-emerald-500"}
+          - {label: "紫色", value: "from-purple-500 to-pink-500"}
+          - {label: "橙色", value: "from-orange-500 to-red-500"}
+          - {label: "青色", value: "from-teal-500 to-blue-500"}
+          - {label: "靛色", value: "from-indigo-500 to-purple-500"}
+      - label: "技能列表"
+        name: "skills"
+        widget: "list"
+        fields:
+          - {label: "技能名称", name: "name", widget: "string"}
+          - {label: "熟练度(%)", name: "level", widget: "number", min: 0, max: 100}
+      - {label: "排序", name: "order", widget: "number", default: 1}
+
+  # 站点配置
+  - name: "settings"
+    label: "站点配置"
+    files:
+      - label: "个人信息"
+        name: "profile"
+        file: "content/settings/profile.json"
+        fields:
+          - {label: "名字", name: "name", widget: "string"}
+          - {label: "英文名", name: "englishName", widget: "string"}
+          - {label: "座右铭", name: "motto", widget: "text"}
+          - {label: "简介", name: "bio", widget: "text"}
+          - {label: "邮箱", name: "email", widget: "string"}
+          
+      - label: "社交链接"
+        name: "social"
+        file: "content/settings/social.json"
+        fields:
+          - {label: "GitHub", name: "github", widget: "string"}
+          - {label: "Twitter", name: "twitter", widget: "string"}
+          - {label: "LinkedIn", name: "linkedin", widget: "string"}
+          - {label: "Email", name: "email", widget: "string"}
+          
+      - label: "首页配置"
+        name: "homepage"
+        file: "content/settings/homepage.json"
+        fields:
+          - {label: "欢迎语", name: "welcome", widget: "string"}
+          - {label: "主标题", name: "title", widget: "string"}
+          - {label: "副标题", name: "subtitle", widget: "text"}
+          - {label: "行动号召文字", name: "ctaText", widget: "string"}
+          - {label: "行动号召副文字", name: "ctaSecondary", widget: "string"}
+
+      - label: "关于页面"
+        name: "about"
+        file: "content/settings/about.json"
+        fields:
+          - {label: "我的故事(段落1)", name: "story1", widget: "text"}
+          - {label: "我的故事(段落2)", name: "story2", widget: "text"}
+          - {label: "我的故事(段落3)", name: "story3", widget: "text"}
+          - label: "成长轨迹"
+            name: "timeline"
+            widget: "list"
+            fields:
+              - {label: "年份", name: "year", widget: "string"}
+              - {label: "标题", name: "title", widget: "string"}
+              - {label: "描述", name: "description", widget: "text"}
+          - label: "兴趣爱好"
+            name: "interests"
+            widget: "list"
+            fields:
+              - {label: "名称", name: "title", widget: "string"}
+              - label: "图标"
+                name: "icon"
+                widget: "select"
+                options: ["Code2", "Palette", "Book", "Rocket", "Coffee", "Heart"]
+              - label: "渐变色"
+                name: "color"
+                widget: "select"
+                options:
+                  - {label: "蓝色", value: "from-blue-500 to-cyan-500"}
+                  - {label: "紫色", value: "from-purple-500 to-pink-500"}
+                  - {label: "绿色", value: "from-green-500 to-emerald-500"}
+                  - {label: "橙色", value: "from-orange-500 to-red-500"}
+                  - {label: "黄色", value: "from-amber-500 to-yellow-500"}
+                  - {label: "粉色", value: "from-rose-500 to-pink-500"}

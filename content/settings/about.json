@@ -1,0 +1,64 @@
+{
+  "story1": "作为一名全栈开发者和产品设计师，我相信技术与美学的完美结合能够创造出令人惊艳的数字产品。我的职业生涯始于对编程的热爱，逐渐扩展到设计、产品和用户体验等多个领域。",
+  "story2": "我热衷于探索新技术、尝试新工具，并将它们应用到实际项目中。从前端到后端，从设计到部署，我享受整个产品开发流程带来的挑战和成就感。",
+  "story3": "\"阿岚不懒\"这个名字代表着我的态度：不断学习、持续进步、永不懈怠。在技术快速发展的时代，唯有保持学习的热情，才能在这个领域走得更远。",
+  "timeline": [
+    {
+      "year": "2024",
+      "title": "全能型创作者",
+      "description": "持续深耕全栈开发与产品设计，探索 AI 应用开发的无限可能"
+    },
+    {
+      "year": "2023",
+      "title": "开源贡献者",
+      "description": "活跃于开源社区，贡献多个优质项目，帮助更多开发者"
+    },
+    {
+      "year": "2022",
+      "title": "产品思考者",
+      "description": "从技术视角转向产品思维，关注用户体验与商业价值"
+    },
+    {
+      "year": "2021",
+      "title": "UI/UX 探索",
+      "description": "深入学习设计理论与实践，打造美观易用的用户界面"
+    },
+    {
+      "year": "2020",
+      "title": "全栈之路",
+      "description": "开始系统学习前后端技术，构建完整的Web应用"
+    }
+  ],
+  "interests": [
+    {
+      "title": "技术研究",
+      "icon": "Code2",
+      "color": "from-blue-500 to-cyan-500"
+    },
+    {
+      "title": "设计创作",
+      "icon": "Palette",
+      "color": "from-purple-500 to-pink-500"
+    },
+    {
+      "title": "知识分享",
+      "icon": "Book",
+      "color": "from-green-500 to-emerald-500"
+    },
+    {
+      "title": "产品创新",
+      "icon": "Rocket",
+      "color": "from-orange-500 to-red-500"
+    },
+    {
+      "title": "咖啡品鉴",
+      "icon": "Coffee",
+      "color": "from-amber-500 to-yellow-500"
+    },
+    {
+      "title": "开源精神",
+      "icon": "Heart",
+      "color": "from-rose-500 to-pink-500"
+    }
+  ]
+}
